@@ -14,7 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      product_requests: {
+        Row: {
+          created_at: string
+          department: string | null
+          dimensions: string | null
+          id: string
+          image_url: string | null
+          manufacturer: string
+          notes: string | null
+          part_number: string | null
+          product_name: string
+          reference_link: string | null
+          requester_name: string
+          sap_code: string | null
+          status: string
+          unit_of_measure: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          department?: string | null
+          dimensions?: string | null
+          id?: string
+          image_url?: string | null
+          manufacturer: string
+          notes?: string | null
+          part_number?: string | null
+          product_name: string
+          reference_link?: string | null
+          requester_name: string
+          sap_code?: string | null
+          status?: string
+          unit_of_measure?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          department?: string | null
+          dimensions?: string | null
+          id?: string
+          image_url?: string | null
+          manufacturer?: string
+          notes?: string | null
+          part_number?: string | null
+          product_name?: string
+          reference_link?: string | null
+          requester_name?: string
+          sap_code?: string | null
+          status?: string
+          unit_of_measure?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
