@@ -142,3 +142,11 @@
     color: var(--color-foreground);
   }
 }
+
+@utility hazard-stripe {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-primary) 0 14px,
+    var(--color-accent) 14px 28px
+  );
+}
