@@ -53,7 +53,7 @@ export const Route = createFileRoute("/nova")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: NewRequest;
+  component: NewRequest,
 });
 
 function NewRequest() {
