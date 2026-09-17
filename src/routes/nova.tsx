@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { UNITS, uploadReferenceImage } from "@/lib/product-requests";
+import { notifyNewRequest } from "@/lib/push.functions";
 
 const schema = z.object({
   product_name: z.string().trim().min(2, "Informe o nome da peça").max(120),
@@ -88,6 +89,19 @@ function NewRequest() {
         notes: values.notes || null,
       });
       if (error) throw new Error(error.message);
+
+      // Push alert is best-effort: never block the user's submission on it.
+      try {
+        await notifyNewRequest({
+          data: {
+            product_name: values.product_name,
+            requester_name: values.requester_name,
+            manufacturer: values.manufacturer,
+          },
+        });
+      } catch (pushError) {
+        console.error("[push] notify failed", pushError);
+      }
 
       toast.success("Solicitação enviada!");
       void navigate({ to: "/" });
