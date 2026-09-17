@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Plus, Search } from "lucide-react";
 
+import { EnableNotificationsButton } from "@/components/EnableNotificationsButton";
 import { PortalHeader } from "@/components/PortalHeader";
 import { RequestDetailDialog } from "@/components/RequestDetailDialog";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -89,12 +90,15 @@ function Dashboard() {
               Tudo em um só lugar, pronto para registrar no SAP.
             </p>
           </div>
-          <Button asChild size="lg">
-            <Link to="/nova">
-              <Plus className="size-4" aria-hidden="true" />
-              Nova solicitação
-            </Link>
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <EnableNotificationsButton />
+            <Button asChild size="lg">
+              <Link to="/nova">
+                <Plus className="size-4" aria-hidden="true" />
+                Nova solicitação
+              </Link>
+            </Button>
+          </div>
         </div>
 
         <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
