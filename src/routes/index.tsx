@@ -54,6 +54,7 @@ function Dashboard() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("todos");
   const [selected, setSelected] = useState<ProductRequest | null>(null);
+  const isAdmin = useIsAdmin();
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["product-requests"],
