@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Plus, Search } from "lucide-react";
+import { Download, Plus, Search } from "lucide-react";
 
+import { AdminModeButton } from "@/components/AdminModeButton";
 import { EnableNotificationsButton } from "@/components/EnableNotificationsButton";
 import { PortalHeader } from "@/components/PortalHeader";
 import { RequestDetailDialog } from "@/components/RequestDetailDialog";
@@ -17,6 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useIsAdmin } from "@/lib/admin";
+import { exportRequestsToCsv } from "@/lib/export-requests";
 import {
   STATUSES,
   STATUS_LABEL,
@@ -51,6 +54,7 @@ function Dashboard() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("todos");
   const [selected, setSelected] = useState<ProductRequest | null>(null);
+  const isAdmin = useIsAdmin();
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["product-requests"],
@@ -91,7 +95,16 @@ function Dashboard() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <EnableNotificationsButton />
+            <AdminModeButton />
+            <Button
+              variant="outline"
+              onClick={() => exportRequestsToCsv(requests)}
+              disabled={requests.length === 0}
+            >
+              <Download className="size-4" aria-hidden="true" />
+              Exportar
+            </Button>
+            {isAdmin && <EnableNotificationsButton />}
             <Button asChild size="lg">
               <Link to="/nova">
                 <Plus className="size-4" aria-hidden="true" />
